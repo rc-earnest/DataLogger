@@ -28,7 +28,7 @@ Partial Class DataLogger
         Me.SaveButton = New System.Windows.Forms.Button()
         Me.TopMenuStrip = New System.Windows.Forms.MenuStrip()
         Me.RightClickMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ExitButton = New System.Windows.Forms.Button()
         Me.FileTopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
@@ -45,8 +45,13 @@ Partial Class DataLogger
         Me.OpenRightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.SampleRateRightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.SampleTopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DataLoggerComPort = New System.IO.Ports.SerialPort(Me.components)
+        Me.FilePathStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.SamplingRateStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ComPortStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TopMenuStrip.SuspendLayout()
         Me.RightClickMenuStrip.SuspendLayout()
+        Me.StatusStrip.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -92,13 +97,14 @@ Partial Class DataLogger
         Me.RightClickMenuStrip.Name = "ContextMenuStrip1"
         Me.RightClickMenuStrip.Size = New System.Drawing.Size(117, 48)
         '
-        'StatusStrip1
+        'StatusStrip
         '
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 428)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(800, 22)
-        Me.StatusStrip1.TabIndex = 5
-        Me.StatusStrip1.Text = "StatusStrip1"
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FilePathStatusLabel, Me.SamplingRateStatusLabel, Me.ComPortStatusLabel})
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 428)
+        Me.StatusStrip.Name = "StatusStrip"
+        Me.StatusStrip.Size = New System.Drawing.Size(800, 22)
+        Me.StatusStrip.TabIndex = 5
+        Me.StatusStrip.Text = "StatusStrip1"
         '
         'PictureBox1
         '
@@ -205,6 +211,24 @@ Partial Class DataLogger
         Me.SampleTopMenuStrip.Size = New System.Drawing.Size(180, 22)
         Me.SampleTopMenuStrip.Text = "Sample Rate"
         '
+        'FilePathStatusLabel
+        '
+        Me.FilePathStatusLabel.Name = "FilePathStatusLabel"
+        Me.FilePathStatusLabel.Size = New System.Drawing.Size(52, 17)
+        Me.FilePathStatusLabel.Text = "File Path"
+        '
+        'SamplingRateStatusLabel
+        '
+        Me.SamplingRateStatusLabel.Name = "SamplingRateStatusLabel"
+        Me.SamplingRateStatusLabel.Size = New System.Drawing.Size(83, 17)
+        Me.SamplingRateStatusLabel.Text = "Sampling Rate"
+        '
+        'ComPortStatusLabel
+        '
+        Me.ComPortStatusLabel.Name = "ComPortStatusLabel"
+        Me.ComPortStatusLabel.Size = New System.Drawing.Size(93, 17)
+        Me.ComPortStatusLabel.Text = "Com Port Status"
+        '
         'DataLogger
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -212,7 +236,7 @@ Partial Class DataLogger
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.ExitButton)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.SaveButton)
         Me.Controls.Add(Me.StopButton)
         Me.Controls.Add(Me.StartButton)
@@ -223,6 +247,8 @@ Partial Class DataLogger
         Me.TopMenuStrip.ResumeLayout(False)
         Me.TopMenuStrip.PerformLayout()
         Me.RightClickMenuStrip.ResumeLayout(False)
+        Me.StatusStrip.ResumeLayout(False)
+        Me.StatusStrip.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -234,7 +260,7 @@ Partial Class DataLogger
     Friend WithEvents SaveButton As Button
     Friend WithEvents TopMenuStrip As MenuStrip
     Friend WithEvents RightClickMenuStrip As ContextMenuStrip
-    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents StatusStrip As StatusStrip
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents ExitButton As Button
     Friend WithEvents FileTopMenuStrip As ToolStripMenuItem
@@ -251,4 +277,8 @@ Partial Class DataLogger
     Friend WithEvents SaveRightClickMenuStrip As ToolStripMenuItem
     Friend WithEvents OpenRightClickMenuStrip As ToolStripMenuItem
     Friend WithEvents SampleRateRightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents DataLoggerComPort As IO.Ports.SerialPort
+    Friend WithEvents FilePathStatusLabel As ToolStripStatusLabel
+    Friend WithEvents SamplingRateStatusLabel As ToolStripStatusLabel
+    Friend WithEvents ComPortStatusLabel As ToolStripStatusLabel
 End Class
