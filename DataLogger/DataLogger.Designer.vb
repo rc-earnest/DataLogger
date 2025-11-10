@@ -34,6 +34,19 @@ Partial Class DataLogger
         Me.OpenTopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsTopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.SampleTopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Min10TopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Min5TopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Min1TopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Sec30TopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Sec10TopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Sec5TopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Sec1TopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Ms500TopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Ms200TopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Ms100TopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayDataTopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayFullDataTopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayLast30sTopMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.RightClickMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.FileRightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartRightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
@@ -42,6 +55,19 @@ Partial Class DataLogger
         Me.OpenRightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsRightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.SampleRateRightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Min10RightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Min5RightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Min1RightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Sec30RightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Sec10RightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Sec5RightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Sec1RightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Ms500RightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Ms200RightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Ms100RightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayDataRightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayFullDataRightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayLast30RightClickMenuStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.FilePathStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.SamplingRateStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
@@ -55,6 +81,8 @@ Partial Class DataLogger
         Me.FullDataRadioButton = New System.Windows.Forms.RadioButton()
         Me.Last30sRadioButton = New System.Windows.Forms.RadioButton()
         Me.OpenLogFileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.OpenButton = New System.Windows.Forms.Button()
+        Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.TopMenuStrip.SuspendLayout()
         Me.RightClickMenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
@@ -69,6 +97,7 @@ Partial Class DataLogger
         Me.StartButton.Size = New System.Drawing.Size(75, 23)
         Me.StartButton.TabIndex = 0
         Me.StartButton.Text = "&Start"
+        Me.ToolTip.SetToolTip(Me.StartButton, "Starts communication and timer on selected sample rate")
         Me.StartButton.UseVisualStyleBackColor = True
         '
         'StopButton
@@ -78,7 +107,8 @@ Partial Class DataLogger
         Me.StopButton.Name = "StopButton"
         Me.StopButton.Size = New System.Drawing.Size(75, 23)
         Me.StopButton.TabIndex = 1
-        Me.StopButton.Text = "St&op"
+        Me.StopButton.Text = "Sto&p"
+        Me.ToolTip.SetToolTip(Me.StopButton, "Stops timer and disconnects")
         Me.StopButton.UseVisualStyleBackColor = True
         '
         'SaveButton
@@ -89,6 +119,7 @@ Partial Class DataLogger
         Me.SaveButton.Size = New System.Drawing.Size(75, 23)
         Me.SaveButton.TabIndex = 2
         Me.SaveButton.Text = "S&ave"
+        Me.ToolTip.SetToolTip(Me.SaveButton, "Saves current data points to a file")
         Me.SaveButton.UseVisualStyleBackColor = True
         '
         'TopMenuStrip
@@ -110,39 +141,119 @@ Partial Class DataLogger
         'StartTopMenuStrip
         '
         Me.StartTopMenuStrip.Name = "StartTopMenuStrip"
-        Me.StartTopMenuStrip.Size = New System.Drawing.Size(180, 22)
+        Me.StartTopMenuStrip.Size = New System.Drawing.Size(103, 22)
         Me.StartTopMenuStrip.Text = "Start"
         '
         'StopTopMenuStrip
         '
         Me.StopTopMenuStrip.Name = "StopTopMenuStrip"
-        Me.StopTopMenuStrip.Size = New System.Drawing.Size(180, 22)
+        Me.StopTopMenuStrip.Size = New System.Drawing.Size(103, 22)
         Me.StopTopMenuStrip.Text = "Stop"
         '
         'SaveTopMenuStrip
         '
         Me.SaveTopMenuStrip.Name = "SaveTopMenuStrip"
-        Me.SaveTopMenuStrip.Size = New System.Drawing.Size(180, 22)
+        Me.SaveTopMenuStrip.Size = New System.Drawing.Size(103, 22)
         Me.SaveTopMenuStrip.Text = "Save"
         '
         'OpenTopMenuStrip
         '
         Me.OpenTopMenuStrip.Name = "OpenTopMenuStrip"
-        Me.OpenTopMenuStrip.Size = New System.Drawing.Size(180, 22)
+        Me.OpenTopMenuStrip.Size = New System.Drawing.Size(103, 22)
         Me.OpenTopMenuStrip.Text = "Open"
         '
         'SettingsTopMenuStrip
         '
-        Me.SettingsTopMenuStrip.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SampleTopMenuStrip})
+        Me.SettingsTopMenuStrip.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SampleTopMenuStrip, Me.DisplayDataTopMenuStrip})
         Me.SettingsTopMenuStrip.Name = "SettingsTopMenuStrip"
         Me.SettingsTopMenuStrip.Size = New System.Drawing.Size(61, 20)
         Me.SettingsTopMenuStrip.Text = "Settings"
         '
         'SampleTopMenuStrip
         '
+        Me.SampleTopMenuStrip.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Min10TopMenuStrip, Me.Min5TopMenuStrip, Me.Min1TopMenuStrip, Me.Sec30TopMenuStrip, Me.Sec10TopMenuStrip, Me.Sec5TopMenuStrip, Me.Sec1TopMenuStrip, Me.Ms500TopMenuStrip, Me.Ms200TopMenuStrip, Me.Ms100TopMenuStrip})
         Me.SampleTopMenuStrip.Name = "SampleTopMenuStrip"
         Me.SampleTopMenuStrip.Size = New System.Drawing.Size(139, 22)
         Me.SampleTopMenuStrip.Text = "Sample Rate"
+        '
+        'Min10TopMenuStrip
+        '
+        Me.Min10TopMenuStrip.Name = "Min10TopMenuStrip"
+        Me.Min10TopMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Min10TopMenuStrip.Text = "10 min"
+        '
+        'Min5TopMenuStrip
+        '
+        Me.Min5TopMenuStrip.Name = "Min5TopMenuStrip"
+        Me.Min5TopMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Min5TopMenuStrip.Text = "5 min"
+        '
+        'Min1TopMenuStrip
+        '
+        Me.Min1TopMenuStrip.Name = "Min1TopMenuStrip"
+        Me.Min1TopMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Min1TopMenuStrip.Text = "1 min"
+        '
+        'Sec30TopMenuStrip
+        '
+        Me.Sec30TopMenuStrip.Name = "Sec30TopMenuStrip"
+        Me.Sec30TopMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Sec30TopMenuStrip.Text = "30 sec"
+        '
+        'Sec10TopMenuStrip
+        '
+        Me.Sec10TopMenuStrip.Name = "Sec10TopMenuStrip"
+        Me.Sec10TopMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Sec10TopMenuStrip.Text = "10 sec"
+        '
+        'Sec5TopMenuStrip
+        '
+        Me.Sec5TopMenuStrip.Name = "Sec5TopMenuStrip"
+        Me.Sec5TopMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Sec5TopMenuStrip.Text = "5 sec"
+        '
+        'Sec1TopMenuStrip
+        '
+        Me.Sec1TopMenuStrip.Name = "Sec1TopMenuStrip"
+        Me.Sec1TopMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Sec1TopMenuStrip.Text = "1 sec"
+        '
+        'Ms500TopMenuStrip
+        '
+        Me.Ms500TopMenuStrip.Name = "Ms500TopMenuStrip"
+        Me.Ms500TopMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Ms500TopMenuStrip.Text = "500 ms"
+        '
+        'Ms200TopMenuStrip
+        '
+        Me.Ms200TopMenuStrip.Name = "Ms200TopMenuStrip"
+        Me.Ms200TopMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Ms200TopMenuStrip.Text = "200 ms"
+        '
+        'Ms100TopMenuStrip
+        '
+        Me.Ms100TopMenuStrip.Name = "Ms100TopMenuStrip"
+        Me.Ms100TopMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Ms100TopMenuStrip.Text = "100 ms"
+        '
+        'DisplayDataTopMenuStrip
+        '
+        Me.DisplayDataTopMenuStrip.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DisplayFullDataTopMenuStrip, Me.DisplayLast30sTopMenuStrip})
+        Me.DisplayDataTopMenuStrip.Name = "DisplayDataTopMenuStrip"
+        Me.DisplayDataTopMenuStrip.Size = New System.Drawing.Size(139, 22)
+        Me.DisplayDataTopMenuStrip.Text = "Display Data"
+        '
+        'DisplayFullDataTopMenuStrip
+        '
+        Me.DisplayFullDataTopMenuStrip.Name = "DisplayFullDataTopMenuStrip"
+        Me.DisplayFullDataTopMenuStrip.Size = New System.Drawing.Size(161, 22)
+        Me.DisplayFullDataTopMenuStrip.Text = "Display Full Data"
+        '
+        'DisplayLast30sTopMenuStrip
+        '
+        Me.DisplayLast30sTopMenuStrip.Name = "DisplayLast30sTopMenuStrip"
+        Me.DisplayLast30sTopMenuStrip.Size = New System.Drawing.Size(161, 22)
+        Me.DisplayLast30sTopMenuStrip.Text = "Display Last 30s"
         '
         'RightClickMenuStrip
         '
@@ -183,16 +294,96 @@ Partial Class DataLogger
         '
         'SettingsRightClickMenuStrip
         '
-        Me.SettingsRightClickMenuStrip.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SampleRateRightClickMenuStrip})
+        Me.SettingsRightClickMenuStrip.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SampleRateRightClickMenuStrip, Me.DisplayDataRightClickMenuStrip})
         Me.SettingsRightClickMenuStrip.Name = "SettingsRightClickMenuStrip"
         Me.SettingsRightClickMenuStrip.Size = New System.Drawing.Size(116, 22)
         Me.SettingsRightClickMenuStrip.Text = "Settings"
         '
         'SampleRateRightClickMenuStrip
         '
+        Me.SampleRateRightClickMenuStrip.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Min10RightClickMenuStrip, Me.Min5RightClickMenuStrip, Me.Min1RightClickMenuStrip, Me.Sec30RightClickMenuStrip, Me.Sec10RightClickMenuStrip, Me.Sec5RightClickMenuStrip, Me.Sec1RightClickMenuStrip, Me.Ms500RightClickMenuStrip, Me.Ms200RightClickMenuStrip, Me.Ms100RightClickMenuStrip})
         Me.SampleRateRightClickMenuStrip.Name = "SampleRateRightClickMenuStrip"
-        Me.SampleRateRightClickMenuStrip.Size = New System.Drawing.Size(139, 22)
+        Me.SampleRateRightClickMenuStrip.Size = New System.Drawing.Size(180, 22)
         Me.SampleRateRightClickMenuStrip.Text = "Sample Rate"
+        '
+        'Min10RightClickMenuStrip
+        '
+        Me.Min10RightClickMenuStrip.Name = "Min10RightClickMenuStrip"
+        Me.Min10RightClickMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Min10RightClickMenuStrip.Text = "10 min"
+        '
+        'Min5RightClickMenuStrip
+        '
+        Me.Min5RightClickMenuStrip.Name = "Min5RightClickMenuStrip"
+        Me.Min5RightClickMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Min5RightClickMenuStrip.Text = "5 min"
+        '
+        'Min1RightClickMenuStrip
+        '
+        Me.Min1RightClickMenuStrip.Name = "Min1RightClickMenuStrip"
+        Me.Min1RightClickMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Min1RightClickMenuStrip.Text = "1 min"
+        '
+        'Sec30RightClickMenuStrip
+        '
+        Me.Sec30RightClickMenuStrip.Name = "Sec30RightClickMenuStrip"
+        Me.Sec30RightClickMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Sec30RightClickMenuStrip.Text = "30 sec"
+        '
+        'Sec10RightClickMenuStrip
+        '
+        Me.Sec10RightClickMenuStrip.Name = "Sec10RightClickMenuStrip"
+        Me.Sec10RightClickMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Sec10RightClickMenuStrip.Text = "10 sec"
+        '
+        'Sec5RightClickMenuStrip
+        '
+        Me.Sec5RightClickMenuStrip.Name = "Sec5RightClickMenuStrip"
+        Me.Sec5RightClickMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Sec5RightClickMenuStrip.Text = "5 sec"
+        '
+        'Sec1RightClickMenuStrip
+        '
+        Me.Sec1RightClickMenuStrip.Name = "Sec1RightClickMenuStrip"
+        Me.Sec1RightClickMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Sec1RightClickMenuStrip.Text = "1 sec"
+        '
+        'Ms500RightClickMenuStrip
+        '
+        Me.Ms500RightClickMenuStrip.Name = "Ms500RightClickMenuStrip"
+        Me.Ms500RightClickMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Ms500RightClickMenuStrip.Text = "500 ms"
+        '
+        'Ms200RightClickMenuStrip
+        '
+        Me.Ms200RightClickMenuStrip.Name = "Ms200RightClickMenuStrip"
+        Me.Ms200RightClickMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Ms200RightClickMenuStrip.Text = "200 ms"
+        '
+        'Ms100RightClickMenuStrip
+        '
+        Me.Ms100RightClickMenuStrip.Name = "Ms100RightClickMenuStrip"
+        Me.Ms100RightClickMenuStrip.Size = New System.Drawing.Size(111, 22)
+        Me.Ms100RightClickMenuStrip.Text = "100 ms"
+        '
+        'DisplayDataRightClickMenuStrip
+        '
+        Me.DisplayDataRightClickMenuStrip.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DisplayFullDataRightClickMenuStrip, Me.DisplayLast30RightClickMenuStrip})
+        Me.DisplayDataRightClickMenuStrip.Name = "DisplayDataRightClickMenuStrip"
+        Me.DisplayDataRightClickMenuStrip.Size = New System.Drawing.Size(180, 22)
+        Me.DisplayDataRightClickMenuStrip.Text = "Display Data"
+        '
+        'DisplayFullDataRightClickMenuStrip
+        '
+        Me.DisplayFullDataRightClickMenuStrip.Name = "DisplayFullDataRightClickMenuStrip"
+        Me.DisplayFullDataRightClickMenuStrip.Size = New System.Drawing.Size(180, 22)
+        Me.DisplayFullDataRightClickMenuStrip.Text = "Display Full Data"
+        '
+        'DisplayLast30RightClickMenuStrip
+        '
+        Me.DisplayLast30RightClickMenuStrip.Name = "DisplayLast30RightClickMenuStrip"
+        Me.DisplayLast30RightClickMenuStrip.Size = New System.Drawing.Size(180, 22)
+        Me.DisplayLast30RightClickMenuStrip.Text = "Display Last 30s"
         '
         'StatusStrip
         '
@@ -226,11 +417,12 @@ Partial Class DataLogger
         Me.DataDisplayPictureBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DataDisplayPictureBox.Location = New System.Drawing.Point(12, 39)
+        Me.DataDisplayPictureBox.Location = New System.Drawing.Point(12, 27)
         Me.DataDisplayPictureBox.Name = "DataDisplayPictureBox"
-        Me.DataDisplayPictureBox.Size = New System.Drawing.Size(776, 357)
+        Me.DataDisplayPictureBox.Size = New System.Drawing.Size(776, 353)
         Me.DataDisplayPictureBox.TabIndex = 6
         Me.DataDisplayPictureBox.TabStop = False
+        Me.ToolTip.SetToolTip(Me.DataDisplayPictureBox, "Displays recorded data or data from a file")
         '
         'ExitButton
         '
@@ -240,25 +432,27 @@ Partial Class DataLogger
         Me.ExitButton.Size = New System.Drawing.Size(75, 23)
         Me.ExitButton.TabIndex = 7
         Me.ExitButton.Text = "E&xit"
+        Me.ToolTip.SetToolTip(Me.ExitButton, "Exits the form")
         Me.ExitButton.UseVisualStyleBackColor = True
         '
         'SampleRateComboBox
         '
-        Me.SampleRateComboBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.SampleRateComboBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SampleRateComboBox.FormattingEnabled = True
-        Me.SampleRateComboBox.Location = New System.Drawing.Point(338, 402)
+        Me.SampleRateComboBox.Location = New System.Drawing.Point(359, 402)
         Me.SampleRateComboBox.Name = "SampleRateComboBox"
         Me.SampleRateComboBox.Size = New System.Drawing.Size(121, 21)
-        Me.SampleRateComboBox.TabIndex = 8
+        Me.SampleRateComboBox.TabIndex = 4
+        Me.ToolTip.SetToolTip(Me.SampleRateComboBox, "Selects sample rate")
         '
         'SampleRateLabel
         '
-        Me.SampleRateLabel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.SampleRateLabel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SampleRateLabel.AutoSize = True
-        Me.SampleRateLabel.Location = New System.Drawing.Point(264, 407)
+        Me.SampleRateLabel.Location = New System.Drawing.Point(356, 386)
         Me.SampleRateLabel.Name = "SampleRateLabel"
         Me.SampleRateLabel.Size = New System.Drawing.Size(68, 13)
-        Me.SampleRateLabel.TabIndex = 9
+        Me.SampleRateLabel.TabIndex = 8
         Me.SampleRateLabel.Text = "Sample Rate"
         '
         'SampleRateTimer
@@ -266,29 +460,44 @@ Partial Class DataLogger
         '
         'FullDataRadioButton
         '
+        Me.FullDataRadioButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FullDataRadioButton.AutoSize = True
-        Me.FullDataRadioButton.Location = New System.Drawing.Point(474, 405)
+        Me.FullDataRadioButton.Location = New System.Drawing.Point(495, 405)
         Me.FullDataRadioButton.Name = "FullDataRadioButton"
         Me.FullDataRadioButton.Size = New System.Drawing.Size(104, 17)
-        Me.FullDataRadioButton.TabIndex = 10
+        Me.FullDataRadioButton.TabIndex = 5
         Me.FullDataRadioButton.TabStop = True
         Me.FullDataRadioButton.Text = "Display Full Data"
+        Me.ToolTip.SetToolTip(Me.FullDataRadioButton, "displays all data recorded")
         Me.FullDataRadioButton.UseVisualStyleBackColor = True
         '
         'Last30sRadioButton
         '
+        Me.Last30sRadioButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Last30sRadioButton.AutoSize = True
-        Me.Last30sRadioButton.Location = New System.Drawing.Point(584, 405)
+        Me.Last30sRadioButton.Location = New System.Drawing.Point(605, 405)
         Me.Last30sRadioButton.Name = "Last30sRadioButton"
         Me.Last30sRadioButton.Size = New System.Drawing.Size(102, 17)
-        Me.Last30sRadioButton.TabIndex = 11
+        Me.Last30sRadioButton.TabIndex = 6
         Me.Last30sRadioButton.TabStop = True
         Me.Last30sRadioButton.Text = "Display Last 30s"
+        Me.ToolTip.SetToolTip(Me.Last30sRadioButton, "displays the last 30 seconds of data")
         Me.Last30sRadioButton.UseVisualStyleBackColor = True
         '
         'OpenLogFileDialog
         '
         Me.OpenLogFileDialog.FileName = "OpenFileDialog1"
+        '
+        'OpenButton
+        '
+        Me.OpenButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.OpenButton.Location = New System.Drawing.Point(255, 402)
+        Me.OpenButton.Name = "OpenButton"
+        Me.OpenButton.Size = New System.Drawing.Size(75, 23)
+        Me.OpenButton.TabIndex = 3
+        Me.OpenButton.Text = "&Open"
+        Me.ToolTip.SetToolTip(Me.OpenButton, "Prompts to open a .log file")
+        Me.OpenButton.UseVisualStyleBackColor = True
         '
         'DataLogger
         '
@@ -296,6 +505,7 @@ Partial Class DataLogger
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.ContextMenuStrip = Me.RightClickMenuStrip
+        Me.Controls.Add(Me.OpenButton)
         Me.Controls.Add(Me.Last30sRadioButton)
         Me.Controls.Add(Me.FullDataRadioButton)
         Me.Controls.Add(Me.SampleRateLabel)
@@ -353,4 +563,32 @@ Partial Class DataLogger
     Friend WithEvents FullDataRadioButton As RadioButton
     Friend WithEvents Last30sRadioButton As RadioButton
     Friend WithEvents OpenLogFileDialog As OpenFileDialog
+    Friend WithEvents OpenButton As Button
+    Friend WithEvents Min10TopMenuStrip As ToolStripMenuItem
+    Friend WithEvents Min5TopMenuStrip As ToolStripMenuItem
+    Friend WithEvents Min1TopMenuStrip As ToolStripMenuItem
+    Friend WithEvents Sec30TopMenuStrip As ToolStripMenuItem
+    Friend WithEvents Sec10TopMenuStrip As ToolStripMenuItem
+    Friend WithEvents Sec5TopMenuStrip As ToolStripMenuItem
+    Friend WithEvents Sec1TopMenuStrip As ToolStripMenuItem
+    Friend WithEvents Ms500TopMenuStrip As ToolStripMenuItem
+    Friend WithEvents Ms200TopMenuStrip As ToolStripMenuItem
+    Friend WithEvents Ms100TopMenuStrip As ToolStripMenuItem
+    Friend WithEvents DisplayDataTopMenuStrip As ToolStripMenuItem
+    Friend WithEvents DisplayFullDataTopMenuStrip As ToolStripMenuItem
+    Friend WithEvents DisplayLast30sTopMenuStrip As ToolStripMenuItem
+    Friend WithEvents Min10RightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents Min5RightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents Min1RightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents Sec30RightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents Sec10RightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents Sec5RightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents Sec1RightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents Ms500RightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents Ms200RightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents Ms100RightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents DisplayDataRightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents DisplayFullDataRightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents DisplayLast30RightClickMenuStrip As ToolStripMenuItem
+    Friend WithEvents ToolTip As ToolTip
 End Class

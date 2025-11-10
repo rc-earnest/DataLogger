@@ -106,11 +106,6 @@ Public Class DataLogger
         Me.highQueue.Enqueue(high)
         Me.lowQueue.Enqueue(low)
 
-        ' Maintain a fixed dataQueue length (100 samples) — act as a circular buffer.
-        If Me.dataQueue.Count >= 100 Then
-            Me.dataQueue.Dequeue()
-        End If
-
         ' Convert raw bytes into one integer sample value (device-specific bit packing)
         high = high << 2
         low = low >> 6
@@ -241,8 +236,7 @@ Public Class DataLogger
         FilePathStatusLabel.Text = $"File Path Status: ..\..\VBDataLog_{DateTime.Now.ToString("yyMMddhh")}.log"
         FileOpen(1, filePath, OpenMode.Append)
         Do Until highQueue.Count = 0
-            ' We write a record marker and then raw bytes and timestamp.
-            ' Because we use VB6-style Write, string fields will be quoted in the file.
+            ' We write a record marker and then raw bytes and timestamp
             Write(1, "$$AN1")
             Write(1, highQueue.Dequeue)
             Write(1, lowQueue.Dequeue)
@@ -371,6 +365,7 @@ Public Class DataLogger
 
     ' Initialize UI values on form load
     Private Sub DataLogger_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        StartButton.Focus()
         DataDisplayPictureBox.BackColor = Color.Black
         Dim sampleRate(9) As String
         sampleRate(0) = "10 minutes"
@@ -429,4 +424,76 @@ Public Class DataLogger
     Private Sub FullDataRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles FullDataRadioButton.CheckedChanged, Last30sRadioButton.CheckedChanged
         GraphData()
     End Sub
+
+    ' Menu handlers: set the sample rate top-menu items and sync the combo box + timer.
+    ' Each handler sets the ComboBox selected index, updates the timer, and refreshes the status label.
+
+    Private Sub SampleRate10MinutesTopMenuStrip_Click(sender As Object, e As EventArgs) Handles Min10TopMenuStrip.Click, Min10RightClickMenuStrip.Click
+        SampleRateComboBox.SelectedIndex = 0
+        SetTimerRate()
+        SamplingRateStatusLabel.Text = $"Sampling Rate: {SampleRateComboBox.SelectedItem.ToString()}"
+    End Sub
+
+    Private Sub SampleRate5MinutesTopMenuStrip_Click(sender As Object, e As EventArgs) Handles Min5TopMenuStrip.Click, Min5RightClickMenuStrip.Click
+        SampleRateComboBox.SelectedIndex = 1
+        SetTimerRate()
+        SamplingRateStatusLabel.Text = $"Sampling Rate: {SampleRateComboBox.SelectedItem.ToString()}"
+    End Sub
+
+    Private Sub SampleRate1MinuteTopMenuStrip_Click(sender As Object, e As EventArgs) Handles Min1TopMenuStrip.Click, Min1RightClickMenuStrip.Click
+        SampleRateComboBox.SelectedIndex = 2
+        SetTimerRate()
+        SamplingRateStatusLabel.Text = $"Sampling Rate: {SampleRateComboBox.SelectedItem.ToString()}"
+    End Sub
+
+    Private Sub SampleRate30SecondsTopMenuStrip_Click(sender As Object, e As EventArgs) Handles Sec30TopMenuStrip.Click, Sec30RightClickMenuStrip.Click
+        SampleRateComboBox.SelectedIndex = 3
+        SetTimerRate()
+        SamplingRateStatusLabel.Text = $"Sampling Rate: {SampleRateComboBox.SelectedItem.ToString()}"
+    End Sub
+
+    Private Sub SampleRate10SecondsTopMenuStrip_Click(sender As Object, e As EventArgs) Handles Sec10TopMenuStrip.Click, Sec10RightClickMenuStrip.Click
+        SampleRateComboBox.SelectedIndex = 4
+        SetTimerRate()
+        SamplingRateStatusLabel.Text = $"Sampling Rate: {SampleRateComboBox.SelectedItem.ToString()}"
+    End Sub
+
+    Private Sub SampleRate5SecondsTopMenuStrip_Click(sender As Object, e As EventArgs) Handles Sec5TopMenuStrip.Click, Sec5RightClickMenuStrip.Click
+        SampleRateComboBox.SelectedIndex = 5
+        SetTimerRate()
+        SamplingRateStatusLabel.Text = $"Sampling Rate: {SampleRateComboBox.SelectedItem.ToString()}"
+    End Sub
+
+    Private Sub SampleRate1SecondTopMenuStrip_Click(sender As Object, e As EventArgs) Handles Sec1TopMenuStrip.Click, Sec1RightClickMenuStrip.Click
+        SampleRateComboBox.SelectedIndex = 6
+        SetTimerRate()
+        SamplingRateStatusLabel.Text = $"Sampling Rate: {SampleRateComboBox.SelectedItem.ToString()}"
+    End Sub
+
+    Private Sub SampleRate500MsTopMenuStrip_Click(sender As Object, e As EventArgs) Handles Ms500TopMenuStrip.Click, Ms500RightClickMenuStrip.Click
+        SampleRateComboBox.SelectedIndex = 7
+        SetTimerRate()
+        SamplingRateStatusLabel.Text = $"Sampling Rate: {SampleRateComboBox.SelectedItem.ToString()}"
+    End Sub
+
+    Private Sub SampleRate200MsTopMenuStrip_Click(sender As Object, e As EventArgs) Handles Ms200TopMenuStrip.Click, Ms200RightClickMenuStrip.Click
+        SampleRateComboBox.SelectedIndex = 8
+        SetTimerRate()
+        SamplingRateStatusLabel.Text = $"Sampling Rate: {SampleRateComboBox.SelectedItem.ToString()}"
+    End Sub
+
+    Private Sub SampleRate100MsTopMenuStrip_Click(sender As Object, e As EventArgs) Handles Ms100TopMenuStrip.Click, Ms100RightClickMenuStrip.Click
+        SampleRateComboBox.SelectedIndex = 9
+        SetTimerRate()
+        SamplingRateStatusLabel.Text = $"Sampling Rate: {SampleRateComboBox.SelectedItem.ToString()}"
+    End Sub
+
+    Private Sub DisplayFullDataTopMenuStrip_Click(sender As Object, e As EventArgs) Handles DisplayFullDataTopMenuStrip.Click, DisplayFullDataRightClickMenuStrip.Click
+        FullDataRadioButton.Checked = True
+    End Sub
+
+    Private Sub DisplayLast30sTopMenuStrip_Click(sender As Object, e As EventArgs) Handles DisplayLast30sTopMenuStrip.Click, DisplayLast30RightClickMenuStrip.Click
+        Last30sRadioButton.Checked = True
+    End Sub
+
 End Class
