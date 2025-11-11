@@ -38,23 +38,35 @@ Public Class DataLogger
 
     ' SetPortName: choose or prompt for a COM port if multiple are present
     Sub SetPortName()
-        Dim portNames() As String
         Try
-            portNames = SerialPort.GetPortNames()
-            If portNames.Length = 1 Then
-                DataLoggerComPort.PortName = portNames(0)
-            ElseIf portNames.Length > 1 Then
-                ' Populate and show selector form when multiple ports found
-                For Each port In portNames
+            ' Get current snapshot of system COM ports
+            Dim portNames() As String = SerialPort.GetPortNames()
+
+            ' Clear the UI list so we don't accumulate duplicates
+            SelectComPortForm.SelectComPortComboBox.Items.Clear()
+
+            If portNames.Length = 0 Then
+                MessageBox.Show("No COM ports available. Please connect a device and try again.", "COM Port Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            ' Sort and add each port once
+            Array.Sort(portNames)
+            For Each port In portNames
+                If Not SelectComPortForm.SelectComPortComboBox.Items.Contains(port) Then
                     SelectComPortForm.SelectComPortComboBox.Items.Add(port)
-                Next
+                End If
+            Next
+
+            ' If only one port, set it immediately; otherwise prompt selection
+            If SelectComPortForm.SelectComPortComboBox.Items.Count = 1 Then
+                DataLoggerComPort.PortName = SelectComPortForm.SelectComPortComboBox.Items(0).ToString()
+            Else
                 SelectComPortForm.SelectComPortComboBox.SelectedIndex = 0
                 SelectComPortForm.ShowDialog()
-                If SelectComPortForm.DialogResult = DialogResult.OK Then
+                If SelectComPortForm.DialogResult = DialogResult.OK AndAlso SelectComPortForm.SelectComPortComboBox.SelectedItem IsNot Nothing Then
                     DataLoggerComPort.PortName = SelectComPortForm.SelectComPortComboBox.SelectedItem.ToString()
                 End If
-            Else
-                MessageBox.Show("No COM ports available. Please connect a device and try again.", "COM Port Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Catch ex As Exception
             MessageBox.Show("Error accessing COM ports: " & ex.Message, "COM Port Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -391,12 +403,19 @@ Public Class DataLogger
     ' Update label when the sample rate selection changes
     Private Sub SampleRateComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SampleRateComboBox.SelectedIndexChanged
         SamplingRateStatusLabel.Text = $"Sampling Rate: {SampleRateComboBox.SelectedItem.ToString()}"
+        SetTimerRate()
     End Sub
 
     ' Periodic timer tick: capture and redraw
     Private Sub SampleRateTimer_Tick(sender As Object, e As EventArgs) Handles SampleRateTimer.Tick
-        GetData()
-        GraphData()
+        If DataLoggerComPort.IsOpen = True Then
+            GetData()
+            GraphData()
+        Else
+            SampleRateTimer.Enabled = False
+            ComPortStatusLabel.Text = "Com Port Status: Disconnected"
+            MessageBox.Show("COM port disconnected. Stopping data capture.", "COM Port Disconnected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
     End Sub
 
     ' Stop capture and close COM port
